@@ -56,15 +56,13 @@ $classes = array(
     'Controller\GetController',
 );
 
+$builderOptions = new OptionsBuilder();
+$builderOptions->setApiName('Content API');
+$builderOptions->setApiDescription('That is my awesome API, and this is why you fall in love with it.');
+$builderOptions->setOutputDir(__DIR__ . '/docs');
+
 try {
-    $builder = new Builder($classes,
-        array(
-            'output_file'  => 'index.html',
-            'output_dir'   => __DIR__.'/../web',
-            'template_dir' => __DIR__.'/Resources/views',
-            'asset_dir'    => __DIR__.'/Resources/assets',
-        )
-    );
+    $builder = new Builder($classes, $builderOptions);
     $builder->generate();
 } catch (\Exception $e) {
     echo 'There are an error when generating the documentation : ', $e->getMessage();
